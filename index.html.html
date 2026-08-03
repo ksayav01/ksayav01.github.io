@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kelly Sayavongsa — Data & Analytics</title>
+<style>
+  :root {
+    --ink: #14261f;
+    --paper: #f6f4ee;
+    --paper-2: #ece8dd;
+    --moss: #2f5d50;
+    --moss-light: #4a8272;
+    --clay: #c65f3f;
+    --line: #d6d0c2;
+    --muted: #6a7268;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 32px; }
+
+  /* Nav */
+  nav {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(246,244,238,0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  nav .wrap { display: flex; justify-content: space-between; align-items: center; height: 64px; }
+  nav .brand { font-weight: 700; letter-spacing: -0.01em; font-size: 16px; }
+  nav .links { display: flex; gap: 28px; }
+  nav .links a {
+    color: var(--muted); text-decoration: none; font-size: 14px;
+    font-weight: 500; letter-spacing: 0.02em; transition: color 0.15s;
+  }
+  nav .links a:hover { color: var(--moss); }
+  @media (max-width: 620px) { nav .links { gap: 18px; } nav .links a { font-size: 13px; } }
+
+  /* Hero */
+  header {
+    padding: 96px 0 72px;
+    border-bottom: 1px solid var(--line);
+  }
+  .eyebrow {
+    font-size: 13px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--clay); font-weight: 600; margin-bottom: 22px;
+  }
+  header h1 {
+    font-size: clamp(38px, 6vw, 68px);
+    line-height: 1.02; letter-spacing: -0.025em; font-weight: 800;
+    max-width: 15ch; margin-bottom: 26px;
+  }
+  header h1 .accent { color: var(--moss); }
+  header .lede {
+    font-size: clamp(17px, 2.2vw, 21px); max-width: 60ch;
+    color: #33403a;
+  }
+  .stat-row {
+    display: flex; flex-wrap: wrap; gap: 40px; margin-top: 48px;
+  }
+  .stat .num { font-size: 30px; font-weight: 800; color: var(--moss); letter-spacing: -0.02em; }
+  .stat .lab { font-size: 13px; color: var(--muted); letter-spacing: 0.02em; margin-top: 2px; }
+
+  /* Sections */
+  section { padding: 76px 0; border-bottom: 1px solid var(--line); }
+  .sec-head { display: flex; align-items: baseline; gap: 16px; margin-bottom: 44px; }
+  .sec-head .idx {
+    font-size: 13px; font-weight: 700; color: var(--clay);
+    letter-spacing: 0.1em;
+  }
+  .sec-head h2 {
+    font-size: clamp(26px, 3.5vw, 34px); letter-spacing: -0.02em; font-weight: 800;
+  }
+
+  /* About */
+  .about-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 56px; }
+  @media (max-width: 780px) { .about-grid { grid-template-columns: 1fr; gap: 36px; } }
+  .about-body p { margin-bottom: 18px; font-size: 16.5px; color: #33403a; }
+  .about-body p:last-child { margin-bottom: 0; }
+  .about-side {
+    background: var(--paper-2); border: 1px solid var(--line);
+    border-radius: 12px; padding: 28px;
+  }
+  .about-side h3 {
+    font-size: 12px; text-transform: uppercase; letter-spacing: 0.14em;
+    color: var(--muted); margin-bottom: 16px; font-weight: 700;
+  }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .skill-tags span {
+    background: var(--paper); border: 1px solid var(--line);
+    color: var(--moss); font-size: 13px; font-weight: 500;
+    padding: 5px 11px; border-radius: 20px;
+  }
+  .about-side .tenure { margin-top: 24px; }
+  .about-side .tenure .role { font-weight: 600; font-size: 14.5px; }
+  .about-side .tenure .yr { font-size: 13px; color: var(--muted); margin-bottom: 12px; }
+
+  /* Projects */
+  .featured-note { font-size: 14px; color: var(--muted); margin-bottom: 32px; margin-top: -28px; }
+  .proj-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; }
+  @media (max-width: 780px) { .proj-grid { grid-template-columns: 1fr; } }
+  .card {
+    background: #fff; border: 1px solid var(--line); border-radius: 12px;
+    padding: 26px; display: flex; flex-direction: column;
+    transition: transform 0.16s, box-shadow 0.16s, border-color 0.16s;
+  }
+  .card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 28px rgba(20,38,31,0.09);
+    border-color: var(--moss-light);
+  }
+  .card.feature { grid-column: 1 / -1; border-left: 3px solid var(--clay); }
+  .card .tag {
+    align-self: flex-start; font-size: 11px; letter-spacing: 0.08em;
+    text-transform: uppercase; font-weight: 700; color: var(--clay);
+    margin-bottom: 12px;
+  }
+  .card.status-progress .tag { color: var(--muted); }
+  .card h3 { font-size: 19px; letter-spacing: -0.01em; margin-bottom: 10px; line-height: 1.25; }
+  .card p { font-size: 14.5px; color: #47524c; margin-bottom: 16px; flex-grow: 1; }
+  .card .stack { display: flex; flex-wrap: wrap; gap: 6px; }
+  .card .stack span {
+    font-size: 12px; color: var(--muted); background: var(--paper-2);
+    padding: 3px 9px; border-radius: 5px;
+  }
+
+  /* Contact */
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+  @media (max-width: 620px) { .contact-grid { grid-template-columns: 1fr; gap: 24px; } }
+  .contact-body p { font-size: 17px; color: #33403a; margin-bottom: 24px; max-width: 44ch; }
+  .contact-links { display: flex; flex-direction: column; gap: 12px; }
+  .contact-links a {
+    display: inline-flex; align-items: center; gap: 10px;
+    color: var(--ink); text-decoration: none; font-weight: 500;
+    font-size: 16px; padding: 12px 18px; background: #fff;
+    border: 1px solid var(--line); border-radius: 10px;
+    transition: border-color 0.15s, color 0.15s;
+  }
+  .contact-links a:hover { border-color: var(--moss); color: var(--moss); }
+  .contact-links a .k { color: var(--muted); font-size: 13px; min-width: 78px; }
+
+  footer { padding: 36px 0; text-align: center; color: var(--muted); font-size: 13px; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="brand">Kelly Sayavongsa</div>
+    <div class="links">
+      <a href="#about">About</a>
+      <a href="#work">Work</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header>
+  <div class="wrap">
+    <div class="eyebrow">Data &amp; Analytics · Northwest Arkansas</div>
+    <h1>I build the data behind <span class="accent">decisions</span> across an entire retail account.</h1>
+    <p class="lede">Manager of Insights &amp; Analytics on Tyson's Walmart business, working end to end from raw supplier feeds in BigQuery to the reports that sales, replenishment, and transportation teams actually use.</p>
+    <div class="stat-row">
+      <div class="stat"><div class="num">100M+</div><div class="lab">rows modeled across core domains</div></div>
+      <div class="stat"><div class="num">4,600+</div><div class="lab">Walmart stores covered</div></div>
+      <div class="stat"><div class="num">~99%</div><div class="lab">shelf in-stock rate supported</div></div>
+    </div>
+  </div>
+</header>
+
+<section id="about">
+  <div class="wrap">
+    <div class="sec-head"><span class="idx">01</span><h2>About</h2></div>
+    <div class="about-grid">
+      <div class="about-body">
+        <p>As Manager of Insights &amp; Analytics on Tyson's Walmart business, I own the enterprise analytics platform that turns raw supplier feeds into fast, trustworthy reporting for the whole account, spanning sales, inventory, replenishment, purchase orders, fill rate, OTIF, margin and claims, and transportation planning.</p>
+        <p>What I do spans the full analytics stack, from the raw data to the decision. On the engineering side, I design the BigQuery models and pipelines that make enterprise-scale data fast and reliable, and I tune the ones that are not. But the engineering is in service of the harder part: turning that data into something a business team can actually use. I build flexible, self-serve reports people can configure themselves, translate messy operational reality into clear guidance, and partner across sales, replenishment, transportation, customer service, and technical teams to answer questions that cross all of them.</p>
+        <p>The thread through all of it is trust. A fast model that is wrong is worse than useless, so I verify before I believe, and I would rather deliver a smaller answer I can stand behind than a bigger one I cannot.</p>
+        <p>Before moving into analytics leadership, I spent three years in Sales Strategy and Planning, owning analytics for major branded prepared-foods portfolios and partnering closely with demand planning. That commercial grounding keeps my data work tied to outcomes rather than just outputs. I am completing my M.S. in Data Science while doing this work, which keeps theory and practice in constant conversation.</p>
+      </div>
+      <aside class="about-side">
+        <h3>Core Toolkit</h3>
+        <div class="skill-tags">
+          <span>BigQuery</span><span>Power BI</span><span>DAX</span><span>SQL</span>
+          <span>Python</span><span>Data Modeling</span><span>Retail Analytics</span>
+          <span>Supply Chain</span><span>Data Quality</span><span>Self-Service BI</span>
+        </div>
+        <div class="tenure">
+          <h3 style="margin-top:26px;">Current Focus</h3>
+          <div class="role">Manager, Insights &amp; Analytics</div>
+          <div class="yr">Tyson Foods · Walmart account · 2026–present</div>
+          <div class="role">M.S. Data Science</div>
+          <div class="yr">In progress</div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="wrap">
+    <div class="sec-head"><span class="idx">02</span><h2>Work &amp; Projects</h2></div>
+    <p class="featured-note">A mix of applied graduate work and independent analysis, spanning economics, forecasting, NLP, deep learning, and recommender systems.</p>
+    <div class="proj-grid">
+
+      <div class="card feature">
+        <span class="tag">Featured · Time Series</span>
+        <h3>Are American Wages Actually Keeping Up?</h3>
+        <p>A time series analysis of inflation, wage growth, and consumer spending from 2000 to 2026 using Federal Reserve data. Real wages are up on net, but the gains were interrupted exactly when households felt the most strain. The centerpiece is a cautionary finding: a statistically significant regression that turned out to be a pandemic composition artifact and vanished under a robustness check, a reminder that significance is not truth.</p>
+        <div class="stack"><span>Python</span><span>statsmodels</span><span>ARIMA</span><span>FRED data</span><span>Regression</span></div>
+      </div>
+
+      <div class="card">
+        <span class="tag">Data Engineering</span>
+        <h3>Global Tariffs &amp; Commodity Markets</h3>
+        <p>An end-to-end pipeline combining tariff schedules, commodity market data, and trade figures from three source types into a single SQLite database, then using SQL joins and visualization to explore how tariffs track with commodity patterns.</p>
+        <div class="stack"><span>Python</span><span>SQLite</span><span>SQL</span><span>Web scraping</span><span>APIs</span></div>
+      </div>
+
+      <div class="card">
+        <span class="tag">Data Storytelling</span>
+        <h3>Childcare Affordability in America</h3>
+        <p>An analysis of how geography shapes childcare affordability, framed around cost as a share of local income rather than raw price. Built for a policy audience with publication-quality visuals and an executive summary.</p>
+        <div class="stack"><span>Python</span><span>matplotlib</span><span>Geographic analysis</span></div>
+      </div>
+
+      <div class="card">
+        <span class="tag">Recommender Systems</span>
+        <h3>MovieLens Recommendation Engine</h3>
+        <p>A collaborative-filtering recommender built on the MovieLens ratings dataset, exploring how user rating patterns drive recommendations and how recommendation quality is evaluated.</p>
+        <div class="stack"><span>Python</span><span>Collaborative filtering</span><span>Evaluation</span></div>
+      </div>
+
+      <div class="card">
+        <span class="tag">NLP</span>
+        <h3>IMDB Sentiment Analysis</h3>
+        <p>A natural language processing project classifying movie reviews as positive or negative, covering text cleaning, feature extraction, model training, and evaluation end to end.</p>
+        <div class="stack"><span>Python</span><span>NLP</span><span>Classification</span></div>
+      </div>
+
+      <div class="card">
+        <span class="tag">Classification</span>
+        <h3>Loan Approval Prediction</h3>
+        <p>A classification model predicting loan approval from applicant data, comparing model performance and examining which features drive predictions, with a direct look at the fairness implications of lending decisions.</p>
+        <div class="stack"><span>Python</span><span>Classification</span><span>Feature engineering</span></div>
+      </div>
+
+      <div class="card">
+        <span class="tag">Deep Learning</span>
+        <h3>MNIST Handwritten Digit CNN</h3>
+        <p>A convolutional neural network classifying handwritten digits, covering architecture design, training, and evaluation. The portfolio's deep learning entry, showing work beyond tabular data.</p>
+        <div class="stack"><span>Python</span><span>CNN</span><span>Image classification</span></div>
+      </div>
+
+      <div class="card">
+        <span class="tag">Business Analytics</span>
+        <h3>U.S. Retail Sales Visualization</h3>
+        <p>A visualization project exploring U.S. retail sales trends over time and across categories, connecting directly to the trend communication I do for business stakeholders in my day job.</p>
+        <div class="stack"><span>Python</span><span>Time series</span><span>Visualization</span></div>
+      </div>
+
+      <div class="card status-progress">
+        <span class="tag">In Progress</span>
+        <h3>Applied Data Science · Project 2</h3>
+        <p>Second capstone-level applied project for DSC 680, topic in development. Will follow a full end-to-end workflow from proposal through modeling to a recorded presentation.</p>
+        <div class="stack"><span>Coming soon</span></div>
+      </div>
+
+      <div class="card status-progress">
+        <span class="tag">In Progress</span>
+        <h3>Applied Data Science · Project 3</h3>
+        <p>Final capstone-level applied project, completing the set of three that anchors the portfolio.</p>
+        <div class="stack"><span>Coming soon</span></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="sec-head"><span class="idx">03</span><h2>Contact</h2></div>
+    <div class="contact-grid">
+      <div class="contact-body">
+        <p>Open to conversations about data engineering, analytics, and applied data science, especially where retail, supply chain, or CPG data is involved. The best way to reach me is LinkedIn or email.</p>
+      </div>
+      <div class="contact-links">
+        <a href="https://www.linkedin.com/in/kelly-sayavongsa-b53881249/" target="_blank"><span class="k">LinkedIn</span> kelly-sayavongsa</a>
+        <a href="https://github.com/YOUR-USERNAME" target="_blank"><span class="k">GitHub</span> View my repositories</a>
+        <a href="mailto:your-email@example.com"><span class="k">Email</span> your-email@example.com</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">Built and maintained by Kelly Sayavongsa · Northwest Arkansas</div>
+</footer>
+
+</body>
+</html>
